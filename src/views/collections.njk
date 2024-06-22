@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="collections">
+  <div class="collections__wrapper">
+    <div class="collections__titles">
+      {% for collection in prismic.collections %}
+        <p class="collections__titles__label">{{ forloop.index }}</p>
+        <h2 class="collections__titles__title">{{ collection.data.title }}</h2>
+      {% endfor %}
+    </div>
+
+    <div class="collections__gallery">
+      {% for collection in prismic.collections %}
+        {% for products in collection.data.products %}
+          <a class="collections__gallery__link">
+            <figure class="collections__gallery__media">
+              <img
+                src={{products.product.data.image.url}}
+                alt={{products.product.data.image.alt}}
+                class="collections__gallery__media__image">
+            </figure>
+          </a>
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+    <div class="collections__content">
+      {% for collection in prismic.collections %}
+        <article class="collections__content__wrapper">
+          <h2 class="collections__content__title">{{ collection.data.title }}</h2>
+
+          <p class="collections__content__description">
+            {{ collection.data.description }}
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</div>

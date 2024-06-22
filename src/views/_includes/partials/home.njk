@@ -1,0 +1,31 @@
+<div class="home">
+  <div class="home__wrapper">
+    <div class="home__collection__titles">
+      {% for collection in prismic.collections %}
+        <div class="home__collection__label">
+          <p class="home__collection__label__text">
+            Collection {{loop.index}}
+          </p>
+        </div>
+
+        <div class="home__collection__title">
+          <h2 class="home__collection__title__text">
+            {{collection.data.title}}
+          </h2>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="home__gallery">
+      {% for gallery in prismic.home.data.galleries %}
+        <figure class="home__gallery__media">
+          <img src="{{gallery.image.url}}" alt="{{gallery.image.alt}}" class="home__gallery__media__image">
+        </figure>
+      {% endfor %}
+    </div>
+
+    <a href="/collections" class="home__collections__link">
+      {{ prismic.home.data.button }}
+    </a>
+  </div>
+</div>

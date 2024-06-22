@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: prismic.products
+  size: 1
+  alias: product
+permalink: "products/{{ product.uid | slugify }}/"
+---
+
+<div class="product">
+  <div class="product__wrapper">
+    <figure class="product__media">
+      <img
+        class="product__media__image"
+        src={{ product.data.image.url }}
+        alt={{ product.data.image.alt }}/>
+
+      <div class="product__info">
+        <p>{{ product.data.collection.data.title }}</p>
+
+        <h1>{{ product.data.name }}</h1>
+
+        <div class="product__info__content">
+          <div class="product__info__highlights">
+            <ul>
+              {% for highlight in product.data.highlights %}
+                <li>
+                  <p>{{ highlight.icon }}</p>
+
+                  <p>{{ highlight.text }}</p>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="product__info__list">
+            <ul>
+              {% for item in product.data.information %}
+                <li>
+                  <strong>{{ item.label }}</strong>
+
+                  <span>{{ item.description }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <a
+            class="product__info__link"
+            href={{ product.data.link.url }}
+            target="_blank"
+            rel="noopener noreferrer">Shop It</a>
+        </div>
+      </div>
+    </figure>
+  </div>
+</div>

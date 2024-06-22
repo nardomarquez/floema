@@ -1,0 +1,15 @@
+@import "./base/reset.css";
+
+@import "./home.css";
+
+@import "./about/about.css";
+@import "./about/content.css";
+@import "./about/gallery.css";
+@import "./about/highlight.css";
+
+@import "./collections/collections.css";
+@import "./collections/content.css";
+@import "./collections/gallery.css";
+@import "./collections/titles.css";
+
+@import "./product/product.css";

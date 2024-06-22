@@ -1,0 +1,92 @@
+---
+layout: layouts/base.njk
+---
+
+<div class="about">
+  <div class="about__wrapper">
+    <section class="about__gallery">
+      {% for media in prismic.about.data.gallery %}
+        <figure class="about__gallery__media">
+          <img src="{{ media.image.url }}" alt="{{ media.image.alt }}" class="about__gallery__media__image">
+        </figure>
+      {% endfor %}
+    </section>
+
+    {% for section in prismic.about.data.body %}
+      {% if section.slice_type == 'title' %}
+        <h2 class="about__title">
+          {{ section.primary.text | escape | nl2br }}
+        </h2>
+
+      {% elif section.slice_type == 'content' %}
+        <section class="about__content {% if section.primary.type == "Left" %}about__content--left{% else %}about__content--right{% endif %}">
+          <div class="about__content__wrapper">
+            <div class="about__content__box">
+              <p class="about__content__label">
+                {{ section.primary.label | escape }}
+              </p>
+
+              <div class="about__content__description">
+                {{ prismic.asHTML(section.primary.description) | safe }}
+              </div>
+            </div>
+
+            <figure class="about__content__media">
+              <div class="about__content__media__wrapper">
+                <img 
+                  class="about__content__media__image"
+                  src="{{section.primary.image.url}}"
+                  alt="{{section.primary.image.alt}}" 
+                >
+              </div>
+            </figure>
+          </div>
+        </section>
+
+      {% elif section.slice_type == 'highlight' %}
+        <section class="about__hightlight">
+          <div class="about__hightlight__wrapper">
+            <a href="" class="about__hightlight__link">
+              {% if section.primary.label %}
+                <p class="about__highlight__label">
+                  {{ section.primary.label }}
+                </p>
+              {% endif %}
+
+              <h3 class="about__highlight__title">
+                {{ section.primary.title }}
+              </h3>
+            </a>
+
+            <div class="about__highlight__medias">
+              {% for media in section.items %}
+                <figure class="about__highlight__media">
+                  <img 
+                    class="about__highlight__media__image"
+                    src="{{ media.image.url }}"
+                    alt="{{ media.image.alt }}"
+                  >
+                </figure>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+
+      {% elif section.slice_type == 'gallery' %}
+        <section class="about__gallery">
+          <div class="about__gallery__wrapper">
+            {% for media in section.items %}
+              <figure class="about__gallery__media">
+                <img 
+                class="about__gallery__media__image"
+                src="{{ media.image.url }}"
+                alt="{{ media.image.alt }}"
+              >
+              </figure>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
